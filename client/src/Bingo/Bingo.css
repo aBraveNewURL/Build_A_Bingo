@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    justify-content: center;   
+   }
+   table td {
+       
+       border: 1px solid green;
+       width: 125px;
+       height: 125px;
+       ;
+   }
+   
+   
