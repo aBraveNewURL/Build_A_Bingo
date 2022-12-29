@@ -1,7 +1,7 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const app = express();
-const connectToMongoDB = require('./config/connection');
+const connectToMongoDB = require('./server/config/connection');
 
 
 // Connect to the MongoDB database
