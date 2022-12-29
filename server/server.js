@@ -6,7 +6,7 @@ const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection'); // conflicts with existing 'db' 
 const PORT = process.env.PORT || 4000;
 const app = express();
-const connectToMongoDB = require('./config/connection');
+// const connectToMongoDB = require('./config/connection');
 
 const server = new ApolloServer({
   typeDefs,
@@ -36,7 +36,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
 
 // Connect to the MongoDB database
-connectToMongoDB();
+// connectToMongoDB();
 // Create a new user account
 app.post('/api/users', (req, res) => {
   // Get the user data from the request body
