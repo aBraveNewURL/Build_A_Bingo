@@ -7,7 +7,7 @@ type User {
     email: String!
     password: String!
     friends: [User]
-    favorites: [bingoList]
+    favorites: [BingoList]
 }
 
 type BingoList {
@@ -26,6 +26,12 @@ type BingoCard {
 }
 
 type CardSquare {
+    text: String!
+    location: String!
+    status: Boolean
+}
+
+input CardSquareInput {
     text: String!
     location: String!
     status: Boolean
@@ -51,7 +57,7 @@ type Mutation {
     deleteCard(cardId: ID!): [BingoCard]
     deleteList(listId: ID!): [BingoList]
     login(email: String!, password: String!): Auth
-    saveCard(owner: ID, parentList: ID, squares: [CardSquare]!, status: Boolean): BingoCard
+    saveCard(owner: ID, parentList: ID, squares: [CardSquareInput]!, status: Boolean): BingoCard
     saveList(owner: ID, name: String!, list: [String]!): BingoList
 }
 
