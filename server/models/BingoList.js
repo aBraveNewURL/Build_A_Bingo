@@ -24,14 +24,12 @@ const bingoListSchema = new Schema(
       type: String,
       required: true,
     },
-    list: [
-      {
-        type: String,
-        maxLength: 120,
-        validate: listValidator(this.list),
+    list: {
+        type: [String],
         required: true,
-      },
-    ],
+        maxLength: 120,
+        validate: listValidator,
+    },
   },
   {
     toJSON: {

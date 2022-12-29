@@ -1,5 +1,5 @@
 {
-  "name": "Build-a-Bingo",
+  "name": "build-a-bingo",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
