@@ -64,4 +64,4 @@ const emails = [
     }
 ];
 
-const getRandomIndex = (arr) => Math.floor(Math.random() * arr.length;)
+const getRandomIndex = (arr) => Math.floor(Math.random() * arr.length);
