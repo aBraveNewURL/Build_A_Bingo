@@ -47,12 +47,14 @@ type Query {
 }
 
 type Mutation {
-    login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveList(owner: ID, name: String!, list: [String]!): BingoList
+    deleteCard(cardId: ID!): [BingoCard]
+    deleteList(listId: ID!): [BingoList]
+    login(email: String!, password: String!): Auth
     saveCard(owner: ID, parentList: ID, squares: [CardSquare]!, status: Boolean): BingoCard
-    removeList(listId: ID!): [BingoList]
-    removeCard(cardId: ID!): [BingoCard]
+    saveList(owner: ID, name: String!, list: [String]!): BingoList
 }
 
 `;
+
+module.exports = typeDefs;
