@@ -1,9 +1,38 @@
 require('dotenv').config();
 const express = require('express');
-const graphqlHTTP = require('express-graphql');
+const { ApolloServer } = require('apollo-server-express');
+const path = require('path');
+const { typeDefs, resolvers } = require('./schemas');
+const db = require('./config/connection'); // conflicts with existing 'db' 
+const PORT = process.env.PORT || 4000;
 const app = express();
 const connectToMongoDB = require('./config/connection');
-const jwt = require('jsonwebtoken');
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+// Create a new instance of an Apollo server with the GraphQL schema
+const startApolloServer = async (typeDefs, resolvers) => {
+  await server.start();
+  server.applyMiddleware({ app });
+  
+  db.once('open', () => {
+    app.listen(PORT, () => {
+      console.log(`API server running on port ${PORT}!`);
+      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+    })
+  })
+  };
+
 
 
 // Connect to the MongoDB database
@@ -40,56 +69,8 @@ app.post('/api/users', (req, res) => {
   })
 });
 
-  app.use('/graphql', graphqlHTTP({
-    schema: '',// your GraphQL schema
-    rootValue: '',// your root resolver object
-    graphiql: true // enable the GraphiQL interface
-  }));
-
-  // START: added portion with JWT components
-  app.use(express.json())
-
-  // TODO 'posts' variable can be commented out or removed completely once tested 
-  const posts = [
-    {
-      username: 'TEST1',
-      title: 'First post'
-    },
-    {
-      username: 'TEST2',
-      title: 'Second post'
-    },
-    {
-      username: 'TEST3',
-      title: 'Third post'
-    }
-  ]
-
-  app.get('/posts', authenticateToken, (req, res) => {
-    res.json(posts.filter(post = post.username === req.user.name))
-  })
-
-  app.post('/login', (req, res) => {
-    // user will need authentication - bcrypt? 
-    const username = req.body.username
-    const user = { name: username }
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-    res.json({ accessToken: accessToken })
-  })
-
-  function authenticateToken(req, res, next) {
-    const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
-    if (token == null)
-      return res.sendStatus(401)
-
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-      if (err) return res.sendStatus(403)
-      req.user = user
-      next()
-    })
-  }
-  // END: added portion with JWT components
+  // Call the async function to start the server
+  startApolloServer(typeDefs, resolvers);
 
   app.listen(4000, () => {
     console.log('Server listening on port 4000');
