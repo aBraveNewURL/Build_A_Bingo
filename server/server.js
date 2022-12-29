@@ -4,9 +4,8 @@ const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection'); // conflicts with existing 'db' 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 const app = express();
-// const connectToMongoDB = require('./config/connection');
 
 const server = new ApolloServer({
   typeDefs,
@@ -36,7 +35,6 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
 
 // Connect to the MongoDB database
-// connectToMongoDB();
 // Create a new user account
 app.post('/api/users', (req, res) => {
   // Get the user data from the request body
@@ -72,6 +70,6 @@ app.post('/api/users', (req, res) => {
   // Call the async function to start the server
   startApolloServer(typeDefs, resolvers);
 
-  app.listen(4000, () => {
-    console.log('Server listening on port 4000');
-  });
+  // app.listen(4000, () => {
+  //   console.log('Server listening on port 4000');
+  // });
