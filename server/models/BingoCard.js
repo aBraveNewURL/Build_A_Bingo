@@ -43,14 +43,12 @@ const bingoCardSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "BingoList",
   },
-  squares: {
-    type: [squareSchema],
-    required: true,
-    validate: squaresValidator
-  },
-  status: {
-    type: Boolean,
-  },
+  squares: 
+    {
+      type: [squareSchema],
+      required: true,
+      // validate: squaresValidator,
+    },
 });
 
 const BingoCard = model("BingoCard", bingoCardSchema);

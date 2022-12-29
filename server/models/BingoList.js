@@ -28,7 +28,7 @@ const bingoListSchema = new Schema(
         type: [String],
         required: true,
         maxLength: 120,
-        validate: listValidator,
+        // validate: listValidator,
     },
   },
   {
