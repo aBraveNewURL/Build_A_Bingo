@@ -1,7 +1,7 @@
 import React from 'react'
 
 let Game = () => {
-    const Card = ({num}) => {
+    const CardSquare = ({num}) => {
         return <td onClick={() => {
             click(num)
             alert(`You chose ${num}`)
@@ -16,39 +16,39 @@ let Game = () => {
             <table>
                 <tbody>
                     <tr>
-                        <Card num={0} />
-                        <Card num={1} />
-                        <Card num={2} />
-                        <Card num={3} />
-                        <Card num={4} />
+                        <CardSquare num={0} />
+                        <CardSquare num={1} />
+                        <CardSquare num={2} />
+                        <CardSquare num={3} />
+                        <CardSquare num={4} />
                     </tr>
                     <tr>
-                        <Card num={5} />
-                        <Card num={6} />
-                        <Card num={7} />
-                        <Card num={8} />
-                        <Card num={9} />
+                        <CardSquare num={5} />
+                        <CardSquare num={6} />
+                        <CardSquare num={7} />
+                        <CardSquare num={8} />
+                        <CardSquare num={9} />
                     </tr>
                     <tr>
-                        <Card num={10} />
-                        <Card num={11} />
-                        <Card num={12} />
-                        <Card num={13} />
-                        <Card num={14} />
+                        <CardSquare num={10} />
+                        <CardSquare num={11} />
+                        <CardSquare num={12} />
+                        <CardSquare num={13} />
+                        <CardSquare num={14} />
                     </tr>
                     <tr>
-                        <Card num={15} />
-                        <Card num={16} />
-                        <Card num={17} />
-                        <Card num={18} />
-                        <Card num={19} />
+                        <CardSquare num={15} />
+                        <CardSquare num={16} />
+                        <CardSquare num={17} />
+                        <CardSquare num={18} />
+                        <CardSquare num={19} />
                     </tr>
                     <tr>
-                        <Card num={20} />
-                        <Card num={21} />
-                        <Card num={22} />
-                        <Card num={23} />
-                        <Card num={24} />
+                        <CardSquare num={20} />
+                        <CardSquare num={21} />
+                        <CardSquare num={22} />
+                        <CardSquare num={23} />
+                        <CardSquare num={24} />
                     </tr>
                 </tbody>
             </table>

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-const graphqlHTTP = require('express-graphql');
+const { graphqlHTTP }= require('express-graphql');
+const { buildSchema } = require('graphql');
 const app = express();
 const connectToMongoDB = require('./config/connection');
 const jwt = require('jsonwebtoken');
@@ -40,9 +41,21 @@ app.post('/api/users', (req, res) => {
   })
 });
 
+  let schema = buildSchema(`
+  type Query {
+    hello: String
+  }
+`); 
+
+var root = {
+  hello: () => {
+    return 'Hello world!';
+  },
+};
+
   app.use('/graphql', graphqlHTTP({
-    schema: '',// your GraphQL schema
-    rootValue: '',// your root resolver object
+    schema: schema,// your GraphQL schema
+    rootValue: root,// your root resolver object
     graphiql: true // enable the GraphiQL interface
   }));
 
