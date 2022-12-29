@@ -34,33 +34,24 @@ const squareSchema = new Schema({
   },
 });
 
-const bingoCardSchema = new Schema(
-  {
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-    parentList: {
-      type: Schema.Types.ObjectId,
-      ref: "BingoList",
-    },
-    squares: [
-      {
-        squareSchema,
-        validate: squaresValidator(this.squares),
-        required: true,
-      },
-    ],
-    status: {
-      type: Boolean,
-    },
+const bingoCardSchema = new Schema({
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
-);
+  parentList: {
+    type: Schema.Types.ObjectId,
+    ref: "BingoList",
+  },
+  squares: {
+    type: [squareSchema],
+    required: true,
+    validate: squaresValidator
+  },
+  status: {
+    type: Boolean,
+  },
+});
 
 const BingoCard = model("BingoCard", bingoCardSchema);
 
