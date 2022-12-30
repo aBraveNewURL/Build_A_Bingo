@@ -1,23 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-// does 'this' refer to the document or the schema?
-function squaresValidator(squares) {
-  if (squares.length < 25) {
-    return false;
-  }
-  for (let i = 0; i < squares.length; i++) {
-    for (let j = i + 1; j < squares.length; j++) {
-      if (
-        squares[j].text === squares[i].text ||
-        squares[j].location === squares[i].location
-      ) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
 // subdocument schema to be used inside bingoCardSchema
 const squareSchema = new Schema({
   text: {
@@ -47,7 +29,27 @@ const bingoCardSchema = new Schema({
     {
       type: [squareSchema],
       required: true,
-      // validate: squaresValidator,
+      validate: {
+        //custom validator to check if there are enough squares and if each square has a unique address
+        validator: function(arr) {
+          function checkUnique () {
+            for (let i = 0; i < arr.length; i++) {
+              if (arr[i].location === /[Cc][3]/) {
+                return false;
+              }
+              for (let j = i + 1; j < arr.length; j++) {
+                if (arr[j].location === arr[i].location) {
+                  return false;
+                }
+              }
+            }
+            return true;
+          }
+          return arr.length >= 24 && checkUnique();
+        },
+        message:
+          "A card must contain 24 or more squares and each square must have a unique address between a1 and e5. C3 may not be used.",
+      },
     },
 });
 
