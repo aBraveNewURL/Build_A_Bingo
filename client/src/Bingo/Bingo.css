@@ -2,12 +2,30 @@
     display: flex;
     justify-content: center;   
    }
+   
    table td {
-       
        border: 1px solid green;
        width: 125px;
        height: 125px;
-       ;
    }
    
+   button {
+   border: 1px solid green;
+   width: 125px;
+   height: 125px;
+   font-size: 16px;
+   padding: 7px 20px 7px 20px;
+   background-color: #58CAE0;
+   margin: 4px;
+   cursor: pointer;
+   border-radius: 4px;
+   outline: none;
+   font-weight: bold;
+   }
+   
+   button.active {
+       background-color: #328494;
+       color: #6ee073;
+       font-weight: bold;
+   }
    
