@@ -1,54 +1,48 @@
-import React from 'react'
+import React, {useState} from 'react'
+import Button from './Button.jsx';
+
+// TODO: change cursor styling upon card hover
 
 let Game = () => {
-    const CardSquare = ({num}) => {
-        return <td onClick={() => {
-            click(num)
-            alert(`You chose ${num}`)
-        }}>Placeholder</td>
-        
-    };
-    const click = () => {
-
-    }
+    // game rules and mechanics go here 
     return (
         <div className='container'>
             <table>
                 <tbody>
                     <tr>
-                        <CardSquare num={0} />
-                        <CardSquare num={1} />
-                        <CardSquare num={2} />
-                        <CardSquare num={3} />
-                        <CardSquare num={4} />
+                        <Button num={0} />
+                        <Button num={1} />
+                        <Button num={2} />
+                        <Button num={3} />
+                        <Button num={4} />
                     </tr>
                     <tr>
-                        <CardSquare num={5} />
-                        <CardSquare num={6} />
-                        <CardSquare num={7} />
-                        <CardSquare num={8} />
-                        <CardSquare num={9} />
+                        <Button num={5} />
+                        <Button num={6} />
+                        <Button num={7} />
+                        <Button num={8} />
+                        <Button num={9} />
                     </tr>
                     <tr>
-                        <CardSquare num={10} />
-                        <CardSquare num={11} />
-                        <CardSquare num={12} />
-                        <CardSquare num={13} />
-                        <CardSquare num={14} />
+                        <Button num={10} />
+                        <Button num={11} />
+                        <Button num={12} />
+                        <Button num={13} />
+                        <Button num={14} />
                     </tr>
                     <tr>
-                        <CardSquare num={15} />
-                        <CardSquare num={16} />
-                        <CardSquare num={17} />
-                        <CardSquare num={18} />
-                        <CardSquare num={19} />
+                        <Button num={15} />
+                        <Button num={16} />
+                        <Button num={17} />
+                        <Button num={18} />
+                        <Button num={19} />
                     </tr>
                     <tr>
-                        <CardSquare num={20} />
-                        <CardSquare num={21} />
-                        <CardSquare num={22} />
-                        <CardSquare num={23} />
-                        <CardSquare num={24} />
+                        <Button num={20} />
+                        <Button num={21} />
+                        <Button num={22} />
+                        <Button num={23} />
+                        <Button num={24} />
                     </tr>
                 </tbody>
             </table>
