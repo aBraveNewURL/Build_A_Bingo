@@ -1,8 +1,17 @@
 const db = require('../config/connection');
-const { Users } = require('../models');
+const { User } = require('../models');
+const { emailList, usernameList, getRandomIndex, getRandomIndexValue, getRandomDummyUsers, getRandomBingoNumber } = require('./data');
 
-const usernameData = require('./usernameData.json');
-const emailData = require('./emailData.json');
+console.log('usernameList:', usernameList);
+console.log('emailList:', emailList);
 
-console.log('usernameData:', usernameData);
-console.log('emailData:', emailData);
+db.once('open', async () => {
+
+    await User.deleteMany({});
+
+    const dummyUsers = getRandomDummyUsers(usernameList, emailList, 10);
+
+    await User.collection.insertMany(dummyUsers);
+    process.exit(0);
+
+});
