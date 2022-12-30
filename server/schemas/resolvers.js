@@ -43,26 +43,26 @@ const resolvers = {
       return { token, user };
     },
     deleteCard: async (parent, { cardId }, context) => {
-      if (context.user) {
-        await BingoCard.findOneAndDelete({ _id: cardId }, { new: true });
+      // if (context.user) {
+        await BingoCard.findOneAndDelete({ _id: cardId });
 
-        const updatedCards = BingoCard.find({});
-        return updatedCards.map((card) => {
-          card.toJSON();
-        });
-      }
-      throw new AuthenticationError("You need to be logged in!");
+        // const updatedCards = BingoCard.find({});
+        // return updatedCards.map((card) => {
+        //   card.toJSON();
+        // });
+      // }
+      // throw new AuthenticationError("You need to be logged in!");
     },
     deleteList: async (parent, { listId }, context) => {
-      if (context.user) {
+      // if (context.user) {
         await BingoList.findOneAndDelete({ _id: listId }, { new: true });
 
         const updatedLists = BingoList.find({});
         return updatedLists.map((list) => {
           list.toJSON();
         });
-      }
-      throw new AuthenticationError("You need to be logged in!");
+      // }
+      // throw new AuthenticationError("You need to be logged in!");
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
