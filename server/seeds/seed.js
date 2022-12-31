@@ -28,7 +28,7 @@ db.once('open', async () => {
     const data = await Promise.all(manyUserIds.map(async (user) => {
         const listData = createBingoListRandomNumberData(user);
         const list = await createBingoList(listData);
-        const cardData = await createBingoCardData(list);
+        const cardData = await createBingoCardData(list, user._id);
         const card = await createBingoCard(cardData);
         return;
     }))
