@@ -19,6 +19,18 @@ const userSchema = new Schema(
       required: true,
       minLength: [6, "Your password must be 6 or more characters."],
     },
+    bingoLists: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "BingoList",
+      }
+    ],
+    bingoCards: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "BingoCard",
+      }
+    ],
     friends: [
       {
         type: Schema.Types.ObjectId,
