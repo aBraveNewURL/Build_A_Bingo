@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
-const secret = 'mysecretssshhhhhhh';
-const expiration = '2h';
+const secret = process.env.ACCESS_TOKEN_SECRET;
+const expiration = "2h";
 
 module.exports = {
   signToken: function ({ email, username, _id }) {
@@ -10,14 +10,9 @@ module.exports = {
   },
 };
 
-
-
-
-
-
 // const jwt = require('jsonwebtoken')
 // app.use(express.json())
-// // TODO 'posts' variable can be commented out or removed completely once tested 
+// // TODO 'posts' variable can be commented out or removed completely once tested
 // const posts = [
 //   {
 //     username: 'TEST1',
@@ -36,7 +31,7 @@ module.exports = {
 //   res.json(posts.filter(post = post.username === req.user.name))
 // })
 // app.post('/login', (req, res) => {
-//   // user will need authentication - bcrypt? 
+//   // user will need authentication - bcrypt?
 //   const username = req.body.username
 //   const user = { name: username }
 //   const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
