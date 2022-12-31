@@ -16,6 +16,16 @@ const squareSchema = new Schema({
   },
 });
 
+squareSchema.virtual('col').get(function() {
+  console.log('col:', this.location.split('')[0]);
+  return this.location.split('')[0];
+})
+
+squareSchema.virtual('row').get(function() {
+  console.log('row:', this.location.split('')[1]);
+  return this.location.split('')[1];
+})
+
 const bingoCardSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
@@ -34,7 +44,7 @@ const bingoCardSchema = new Schema({
         validator: function(arr) {
           function checkUnique () {
             for (let i = 0; i < arr.length; i++) {
-              if (arr[i].location === /[Cc][3]/) {
+              if (arr[i].location === /[c][3]/) {
                 return false;
               }
               for (let j = i + 1; j < arr.length; j++) {

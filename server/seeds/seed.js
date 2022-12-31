@@ -1,37 +1,37 @@
 const db = require('../config/connection');
-const { User, BingoList } = require('../models');
-const { emailList, usernameList, bingoList, getRandomIndex, getRandomIndexValue, getRandomDummyUsers, getRandomBingoNumber, getRandomBingoNumberList } = require('./data');
+const { User, BingoList, BingoCard } = require('../models');
+const { emailList, usernameList, bingoList, } = require('./lists');
+const { createBingoCardData, getRandomIndex, getRandomIndexValue, createDummyUserData, getRandomNumber, createBingoListRandomNumberData, createBingoList, createBingoCard } = require('../utils/data');
 
 db.once('open', async () => {
 
-    const numList = getRandomBingoNumberList();
+    await User.deleteMany({});
+    await BingoList.deleteMany({});
+    await BingoCard.deleteMany({});
 
-    console.log(numList);
-    console.log(numList.list.length);
+    // create users list, then add them to the db
+    const dummyUserData = createDummyUserData(usernameList, emailList, 10);
+    const users = await User.collection.insertMany(dummyUserData);
 
-    // await User.deleteMany({});
-    // await BingoList.deleteMany({});
+
+    const userIdForNewLists = await User.findOne({}).select('_id').exec();
+
+    // Since the bingoList items don't have an owner and owners are dynamically generated, we'll need to add the owner property to each list.
+    bingoList.map(async (list) => {
+        list.owner = userIdForNewLists;
+        createBingoList(list);
+        return list;
+    });
     
-    // // create users list, then add them to the db
-    // const dummyUserList = getRandomDummyUsers(usernameList, emailList, 10);
-    // const users = await User.collection.insertMany(dummyUserList);
-    
+    const manyUserIds = await User.find({}).select('_id').limit(10);
 
-    // const userForNewLists = await User.findOne({}).select('_id').exec();
+    const data = await Promise.all(manyUserIds.map(async (user) => {
+        const listData = createBingoListRandomNumberData(user);
+        const list = await createBingoList(listData);
+        const cardData = await createBingoCardData(list);
+        const card = await createBingoCard(cardData);
+        return;
+    }))
 
-    // const bingoListData = await bingoList.map((list) => {
-    //     list.owner = userForNewLists;
-    //     return list;
-    // });
-
-    // await BingoList.collection.insertMany(bingoListData);
-
-    // const manyUsers = await User.find({}).select('_id').limit(10);
-    
-    // manyUsers.map((user) => {
-    //     console.log(user);
-
-    // })
     process.exit(0);
-
 });
