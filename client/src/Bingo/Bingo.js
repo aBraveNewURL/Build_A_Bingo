@@ -52,7 +52,7 @@ import Button from './Button.jsx';
     
 // }
 
-const squareSize = "w-12 h-12 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48"
+const squareSize = "w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48"
 
 let Game = () => {
     return (

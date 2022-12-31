@@ -12,7 +12,7 @@ function Button () {
 
     return (
         // added a 'hover' Tailwind class
-        <button className={`btn${toggleClassCheck} hover:bg-darkerBlue min-w-full min-h-full text-xs sm:text-base`} onClick={handleClick}
+        <button className={`btn${toggleClassCheck} hover:bg-darkerBlue min-w-full min-h-full text-xs sm:text-sm md:text-base`} onClick={handleClick}
         >Press Me</button>
     )
 };
