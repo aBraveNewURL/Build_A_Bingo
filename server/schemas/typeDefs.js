@@ -28,6 +28,8 @@ type BingoCard {
 type CardSquare {
     text: String!
     location: String!
+    col: String
+    row: String
     status: Boolean
 }
 

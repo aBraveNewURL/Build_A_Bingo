@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 
+
 const bingoListSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
