@@ -49,7 +49,7 @@ type Query {
     card(cardId: ID!): BingoCard
     cards: [BingoCard]
     list(listId: ID!): BingoList
-    lists: [BingoList]
+    lists: [BingoList]!
 }
 
 type Mutation {
