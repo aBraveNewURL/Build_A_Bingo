@@ -21,8 +21,7 @@ const resolvers = {
     },
     card: async (parent, { cardId }) => {
       const card = await BingoCard.findOne({ _id: cardId });
-      console.log(cardId);
-      checkWin(card);
+      console.log(card);
       return card;
     },
     cards: async (parent, args) => {
@@ -91,6 +90,11 @@ const resolvers = {
     saveList: async (parent, { owner, name, list }) => {
       const newList = await BingoList.create({ owner, name, list });
       return newList;
+    },
+    // Currently expects an array of 1 item. We can change this to expect specific properties: (squareLocation, squareStatus) if that would be better
+    updateSquare: async (parent, { cardId, squares }) => {
+      const card = await BingoCard.findOneAndUpdate({ _id: cardId, "squares.location": squares[0].location }, { $set: { "squares.$.status": squares[0].status } }, { new: true });
+      return card;
     },
   },
 };

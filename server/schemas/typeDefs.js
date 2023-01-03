@@ -26,6 +26,7 @@ type BingoCard {
 }
 
 type CardSquare {
+    _id: ID
     text: String!
     location: String!
     col: String
@@ -61,6 +62,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
     saveCard(owner: ID, parentList: ID, squares: [CardSquareInput]!, status: Boolean): BingoCard
     saveList(owner: ID, name: String!, list: [String]!): BingoList
+    updateSquare(cardId: ID!, squares: [CardSquareInput]!): BingoCard
 }
 
 `;
