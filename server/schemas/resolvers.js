@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, BingoCard, BingoList } = require("../models");
 const { signToken } = require("../utils/auth");
+const { checkWin } = require('../utils/bingo');
 
 const resolvers = {
   Query: {
@@ -88,6 +89,11 @@ const resolvers = {
     saveList: async (parent, { owner, name, list }) => {
       const newList = await BingoList.create({ owner, name, list });
       return newList;
+    },
+    // Currently expects an array of 1 item. We can change this to expect specific properties: (squareLocation, squareStatus) if that would be better
+    updateSquare: async (parent, { cardId, squares }) => {
+      const card = await BingoCard.findOneAndUpdate({ _id: cardId, "squares.location": squares.location }, { $set: { "squares.$.status": squares.status } }, { new: true });
+      return card;
     },
   },
 };
