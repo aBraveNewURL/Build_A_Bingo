@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-express";
+import { gql } from "@apollo/client";
 
 const testSquares = [{ "text": "Ice cream", "location": "a1", "status": false },
 { "text": "Donuts", "location": "a2", "status": false },
@@ -25,8 +25,8 @@ const testSquares = [{ "text": "Ice cream", "location": "a1", "status": false },
 { "text": "Chocolate nuts", "location": "e4", "status": false },
 { "text": "Chocolate chips", "location": "e5", "status": false }];
 
-const SAVE_CARD = gql`
-    mutation saveCard($owner: ID, $parentList: ID, $squares: [CardSquareInput]!, status: Boolean): {
+export const SAVE_CARD = gql`
+    mutation saveCard($owner: ID, $parentList: ID, $squares: [CardSquareInput]!, $status: Boolean) {
         saveCard(owner: $owner, parentList: $parentList, squares: $squares, status: $status) {
             id
             owner
@@ -37,10 +37,7 @@ const SAVE_CARD = gql`
             text
             }
             status
-                }
-            }
         }
     }
 `;
 
-module.exports = { SAVE_CARD }
