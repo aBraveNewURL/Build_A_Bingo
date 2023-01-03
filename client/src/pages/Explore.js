@@ -14,7 +14,7 @@ const Explore = () => {
 
   return (
     <main>
-      <div>
+      <div className="my-10 border">
         {loading ? <div>Loading...</div> : <OmniList lists={lists}></OmniList>}
       </div>
     </main>
