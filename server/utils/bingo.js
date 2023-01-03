@@ -80,69 +80,83 @@ module.exports = {
         colA.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         colB.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         colC.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         colD.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         colE.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         row1.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         row2.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         row3.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         row4.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         row5.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         diaTLBR.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         diaBLTR.every((i) => {
             const win = (i === true);
             anyWin.push(win)
+            winStatus = true;
             return win
         });
         anyWin.some((i) => {
             const win = (i === true);
+            winStatus = true;
             return win
         });
         blackoutWin = anyWin.every((i) => {
             const win = (i === true);
+            blackoutWin = true;
             return win
         });
         return winStatus;
