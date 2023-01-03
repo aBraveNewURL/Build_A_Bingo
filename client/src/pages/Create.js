@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { SAVE_CARD } from "../utils/mutations";
+import { SAVE_CARD, SAVE_LIST } from "../utils/mutations";
 
 function Create() {
-  const [cardName, setCardName] = useState("");
+  const [listName, setlistName] = useState("");
   const [squareText, setSquareText] = useState("");
   const [squareNumber, setSquareNumber] = useState(1);
   const [squareList, setSquareList] = useState([]);
+  const [textArea, setTextArea] = useState("");
   const [listDiv, setListDiv] = useState([<li>{squareText}</li>]);
 
-  const [saveCard, { error }] = useMutation(SAVE_CARD);
+  const [saveCard] = useMutation(SAVE_CARD);
+  const [saveList] = useMutation(SAVE_LIST);
 
   //function to take in all the individual squares a user has entered and generate a BingoCard document
-  function generateList(squareArray) {
+  async function generateList(squareArray) {
     const locations = [
       "a1",
       "a2",
@@ -40,18 +42,76 @@ function Create() {
       "e5",
     ];
 
-    const cardSquareInputArray = [];
+    const testArray = [
+      "aa",
+      "bb",
+      "cc",
+      "dd",
+      "ee",
+      "ff",
+      "gg",
+      "hh",
+      "jj",
+      "kk",
+      "ll",
+      "mm",
+      "nn",
+      "oo",
+      "pp",
+      "qq",
+      "rr",
+      "ss",
+      "tt",
+      "uu",
+      "vv",
+      "ww",
+      "xx",
+      "yy",
+      "zz",
+    ];
+
+    const testArray2 = [
+      "aaa",
+      "bbb",
+      "ccc",
+      "ddd",
+      "eee",
+      "fff",
+      "ggg",
+      "hhh",
+      "iii",
+      "jjj",
+      "kkk",
+      "lll",
+      "mmm",
+      "nnn",
+      "ooo",
+      "ppp",
+      "qqq",
+      "rrr",
+      "sss",
+      "ttt",
+      "uuu",
+      "vvv",
+      "www",
+      "xxx",
+      "yyy",
+      "zzz",
+    ];
+
+    const listInputArray = [];
 
     if (squareArray.length <= 24) {
-      for (let i = 0; i < squareArray.length; i++) {
-        //insert a new object conforming to the typeDef {CardSquareInput} into the cardSquareInputArray
-        cardSquareInputArray[i] = {
-          text: squareArray[i],
-          location: locations[i],
-          status: false,
-        };
-      }
-      console.log(cardSquareInputArray);
+      // for (let i = 0; i < squareArray.length; i++) {
+      //   //insert a new object conforming to the typeDef {CardSquareInput} into the listInputArray
+      //   listInputArray[i] = {
+      //     text: squareArray[i],
+      //     location: locations[i],
+      //     status: false,
+      //   };
+      // }
+      setTextArea("You must have at least 24 entries with no repeats.");
+      console.log(listInputArray);
     } else {
       for (let i = 0; i < 24; i++) {
         //make a new copy of the array from which to delete items so they don't repeat
@@ -62,22 +122,37 @@ function Create() {
         let randomText = arrayCopy[randomIndex];
 
         //then assign its value to the next location in sequence and remove it from arrayCopy
-        cardSquareInputArray[i] = {
-          text: randomText,
-          location: locations[i],
-          status: false,
-        };
+        listInputArray[i] = randomText;
 
         arrayCopy.splice(randomIndex, 1);
 
-        console.log(arrayCopy);
-        //do the same thing for all locations
-        //values can't repeat
+        console.log("Spliced array: ", arrayCopy);
       }
-      console.log(cardSquareInputArray);
+      console.log("List input after iteration: ", listInputArray);
     }
-    return cardSquareInputArray;
+    console.log("Original array: ", squareArray);
+    const newList = await saveList({
+      variables: {
+        // should be the currently logged-in user
+        owner: null,
+        name: listName,
+        list: listInputArray,
+      },
+    });
+
+    return newList;
+    // return listInputArray;
   }
+
+  const buttonPress = (event) => {
+    if (event.keyCode === 13) {
+      setSquareList([...squareList, squareText]);
+      setSquareNumber(squareNumber + 1);
+      setSquareText("");
+      setListDiv([...listDiv, <li>{squareText}</li>]);
+      return;
+    }
+  };
 
   //   async function serverCall (list) {
 
@@ -88,29 +163,37 @@ function Create() {
 
   return (
     <div className="my-10 border">
-      <div>Instructions go here</div>
+      <div>Choose a name for your bingo list and enter text for each square one at a time. Your list will be randomized in a later step, so order does not matter. </div>
+      <div className="my-2">
+        {textArea ? `Message: ${textArea}` : `${textArea}`}
+      </div>
       <input
         className="mx-5"
-        onChange={(e) => setCardName(e.target.value)}
-        placeholder="Name your bingo card"
+        onChange={(e) => setlistName(e.target.value)}
+        placeholder="Name your bingo list"
         type="text"
-        value={cardName}
+        value={listName}
         maxLength={34}
       ></input>
       <button
         className="mx-5"
         type="button"
         onClick={function () {
-          setCardName("");
+          setlistName(listName);
+          console.log("Name of list: ", listName);
+          setTextArea(
+            `Your list will be known by the legendary moniker '${listName}'`
+          );
         }}
       >
-        Name Card
+        Name List
       </button>
       <input
         className="mx-5"
         onChange={(e) => setSquareText(e.target.value)}
+        onKeyDown={(e) => buttonPress(e)}
         // onSubmit={function (e) {e.preventDefault(); setSquareNumber(squareNumber + 1); setSquareText("")}}
-        placeholder={`Your text for square ${squareNumber}`}
+        placeholder={`Your text`}
         type="text"
         value={squareText}
         id="square-text"
@@ -126,7 +209,7 @@ function Create() {
           setListDiv([...listDiv, <li>{squareText}</li>]);
         }}
       >
-        Save Square
+        Next Square
       </button>
       <button
         className="mx-5"
@@ -136,6 +219,7 @@ function Create() {
           setSquareNumber(1);
           setSquareText("");
           setListDiv([]);
+          setTextArea("");
         }}
       >
         Reset
@@ -144,15 +228,17 @@ function Create() {
         className="mx-5"
         type="button"
         onClick={function () {
-          //   if (squareList.length < 24) {
-          //     window.alert(
-          //       "You must have at least 24 squares on your bingo card!"
-          //     );
-          //   }
-          generateList(squareList);
+          if (!listName || squareList.length < 24) {
+            setTextArea("Your list must be named and have at least 24 entries with no repeats.");
+          }
+          else {
+            generateList(squareList);
+            setlistName("");
+            setTextArea(`'${listName}' successfully saved!`);
+          }
         }}
       >
-        Export Card
+        Save List!
       </button>
       <div className="grid grid-rows-5">
         {/* trying to get the columns to have only five items before wrapping to a new column */}
