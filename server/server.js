@@ -1,19 +1,26 @@
-require('dotenv').config();
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
+
+require('dotenv').config();
 const path = require('path');
+
+const db = require('./config/connection'); 
 const { typeDefs, resolvers } = require('./schemas');
-const db = require('./config/connection'); // conflicts with existing 'db' 
+const { authMiddleware } = require('./utils/auth');
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: authMiddleware
 });
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+app.use(
+  express.urlencoded({ extended: false }),
+  express.json()
+);
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
@@ -36,36 +43,36 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
 // Connect to the MongoDB database
 // Create a new user account
-app.post('/api/users', (req, res) => {
-  // Get the user data from the request body
-  const user = req.body;
+// app.post('/api/users', (req, res) => {
+//   // Get the user data from the request body
+//   const user = req.body;
 
-  // Hash the password
-  user.password = hashPassword(user.password);
+//   // Hash the password
+//   user.password = hashPassword(user.password);
 
-  // Insert the user into the Users collection
-  db.collection('Users').insertOne(user, (err, result) => {
-    if (err) {
-      console.error(err);
-      res.sendStatus(500);
+//   // Insert the user into the Users collection
+//   db.collection('Users').insertOne(user, (err, result) => {
+//     if (err) {
+//       console.error(err);
+//       res.sendStatus(500);
 
-      // create operation using User.create method
-      app.post('/users', function (req, res) {
-        const user = new User({
-          username: req.body.username,
-          password: req.body.password
-        });
-        user.save(function (error) {
-          if (error) {
-            res.status(500).send(error);
-          } else {
-            res.send(user);
-          }
-        });
-      })
-    }
-  })
-});
+//       // create operation using User.create method
+//       app.post('/users', function (req, res) {
+//         const user = new User({
+//           username: req.body.username,
+//           password: req.body.password
+//         });
+//         user.save(function (error) {
+//           if (error) {
+//             res.status(500).send(error);
+//           } else {
+//             res.send(user);
+//           }
+//         });
+//       })
+//     }
+//   })
+// });
 
   // Call the async function to start the server
   startApolloServer(typeDefs, resolvers);
