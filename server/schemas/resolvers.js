@@ -1,6 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, BingoCard, BingoList } = require("../models");
 const { signToken } = require("../utils/auth");
+const { checkWin } = require('../utils/bingo');
 
 const resolvers = {
   Query: {
@@ -20,6 +21,8 @@ const resolvers = {
     },
     card: async (parent, { cardId }) => {
       const card = await BingoCard.findOne({ _id: cardId });
+      console.log(cardId);
+      checkWin(card);
       return card;
     },
     cards: async (parent, args) => {
