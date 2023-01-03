@@ -19,7 +19,7 @@ const resolvers = {
       return users;
     },
     card: async (parent, { cardId }) => {
-      const card = await BingoCard.find({ _id: cardId });
+      const card = await BingoCard.findOne({ _id: cardId });
       return card;
     },
     cards: async (parent, args) => {
@@ -27,7 +27,7 @@ const resolvers = {
       return cards;
     },
     list: async (parent, { listId }) => {
-      const list = await BingoList.find({ _id: listId });
+      const list = await BingoList.findOne({ _id: listId });
       return list;
     },
     lists: async (parent, args) => {
