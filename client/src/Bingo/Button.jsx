@@ -1,5 +1,8 @@
+import { list } from "postcss";
 import { useState } from "react";
 import '../Bingo/Bingo.css'
+import OmniList from "../components/OmniList";
+import SubList from "../components/SubList";
 
 function Button () {
     const [btnState, setBtnState] = useState(false);
@@ -11,9 +14,8 @@ function Button () {
     let toggleClassCheck = btnState ? ' active' : '';
 
     return (
-        // added a 'hover' Tailwind class
-        <button className={`btn${toggleClassCheck} hover:bg-darkerBlue min-w-full min-h-full text-xs sm:text-sm md:text-base`} onClick={handleClick}
-        >Press Me</button>
+        <button className={`btn${toggleClassCheck} hover:bg-creme min-w-full min-h-full text-xs sm:text-sm md:text-base`} onClick={handleClick}
+        ></button>
     )
 };
 

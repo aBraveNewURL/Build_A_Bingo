@@ -6,6 +6,8 @@ import Create from "./pages/Create";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import "./Bingo/Bingo.css";
+import MegaMenu from "./components/MegaMenuNav";
+import Footer from "./components/Footer"
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -31,14 +33,19 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <div className="App">
-        {/* <Game/> and <Explore/> should probably be on different pages at some point */}
-        <Game />
-        <Explore />
-        <Create />
+    <div class="bg-gradient-to-br from-[#6ee073] to-[#E07863] via-blue-600">
+      <div>
+      <ApolloProvider client={client}>
+        <div className="App">
+          <MegaMenu />
+          {/* <Create /> */}
+          {/* <Explore /> */}
+          <Game />
+        </div>
+      </ApolloProvider>
       </div>
-    </ApolloProvider>
+      <Footer />
+    </div>
   );
 }
 
