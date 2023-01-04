@@ -14,13 +14,13 @@ const Explore = () => {
 
   return (
     <main>
-      <div className="my-10 border">
+      <div class="container">
         {loading ? <div>Loading...</div> : <OmniList lists={lists}></OmniList>}
       </div>
+      
     </main>
+    
   );
 };
 
 export default Explore;
-
-

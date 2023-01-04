@@ -162,7 +162,7 @@ function Create() {
   //   }
 
   return (
-    <div className="my-10 border">
+    <div className="">
       <div>Choose a name for your bingo list and enter text for each square one at a time. Your list will be randomized in a later step, so order does not matter. </div>
       <div className="my-2">
         {textArea ? `Message: ${textArea}` : `${textArea}`}
