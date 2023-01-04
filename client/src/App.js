@@ -3,6 +3,7 @@ import "./Bingo/Bingo";
 import Game from "./Bingo/Bingo";
 import Explore from "./pages/Explore";
 import Create from "./pages/Create";
+import Play from "./pages/Play"
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import "./Bingo/Bingo.css";
@@ -31,21 +32,27 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+// list id for testing purposes only
+const parentListId = "63b5f71b6d5c4f0f31c89700";
+
 function App() {
   return (
-    <div class="bg-gradient-to-br from-[#6ee073] to-[#E07863] via-blue-600">
+    <ApolloProvider client={client}>
+    <div className="bg-gradient-to-br from-[#6ee073] to-[#E07863] via-blue-600">
       <div>
-      <ApolloProvider client={client}>
+      
         <div className="App">
           <MegaMenu />
           {/* <Create /> */}
           {/* <Explore /> */}
           <Game />
+          <Play parentListId={parentListId}/>
         </div>
-      </ApolloProvider>
+      
       </div>
       <Footer />
     </div>
+    </ApolloProvider>
   );
 }
 
