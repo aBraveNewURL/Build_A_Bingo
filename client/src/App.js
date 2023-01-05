@@ -1,18 +1,18 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from "@apollo/client";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
 import MegaMenu from "./components/MegaMenuNav";
 import Footer from "./components/Footer";
 
 import Explore from "./pages/Explore";
+
 import Create from "./pages/Create";
+import MyBingoLists from './pages/MyBingoLists';
+import MyBingoCards from './pages/MyBingoCards';
+import List from './components/BingoList/List';
+
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 
@@ -55,17 +55,23 @@ function App() {
             <div className="App">
               <MegaMenu />
               <Routes>
-                <Route path="/" element={<Explore />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/new" element={<Create />} />
-                <Route path="/play" element={<Game />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Signup />} />
+
+                <Route path='/' element={<Explore />} />
+
+                <Route path='/list/:id' element={<List />} />
+                <Route path='/mylists/' element={<MyBingoLists />} />
+                <Route path='/mycards/' element={<MyBingoCards />} />
+                <Route path='/new' element={<Create />} />
+                <Route path='/play' element={<Game />} />
+
               </Routes>
             </div>
           </Router>
+          <Footer />
         </ApolloProvider>
       </div>
-      <Footer />
     </div>
   );
 }

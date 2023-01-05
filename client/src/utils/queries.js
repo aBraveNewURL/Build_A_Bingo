@@ -1,21 +1,66 @@
 import { gql } from "@apollo/client";
 
 export const GET_LIST = gql`
-query getList($listId: ID!) {
-    list {  
+query list($listId: ID!) {
+    list(listId: $listId) {  
         _id   
-        owner
+        owner {
+            username
+            email
+        }
         name
         list       
     }
 }`;
 
 export const GET_LISTS = gql`
-query getLists {
+query lists {
     lists {
         _id
-        owner
+        owner {
+            username
+            email
+        }
         name
         list
+    }
+}`;
+
+export const GET_LISTS_BY_USER = gql`
+query listsByUser($ownerId: ID!) {
+    listsByUser(ownerId: $ownerId) {  
+        _id
+        owner {
+            username
+            email
+        }
+        name
+        list
+    }
+}`;
+
+export const GET_CARDS_BY_USER = gql`
+query cardsByUser($ownerId: ID!) {
+    cardsByUser(ownerId: $ownerId) {  
+        _id
+        owner {
+            username
+            email
+        }
+        parentList {
+            owner {
+                username
+                email
+            }
+            name
+        }
+        status
+        squares {
+            text
+            location
+            col
+            row
+            status
+        }
     }
 }`;
