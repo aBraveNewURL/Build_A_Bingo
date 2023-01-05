@@ -23,7 +23,7 @@ const Explore = () => {
 
   return (
     <main>
-      <div className="container flex flex-wrap">
+      <div className={`container flex flex-wrap ${display}`}>
 
         {loading ? <div>Loading...</div> : <OmniList lists={lists}></OmniList>}
       </div>
