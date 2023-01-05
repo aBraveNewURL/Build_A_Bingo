@@ -31,7 +31,16 @@ If you prefer to do so, you may also download and run our application locally by
 
 
 ## Usage
-!! SCREENSHOTS NEEDED HERE !!
+Head to our home page and either select from any of the pre-made games:
+![cap2](https://user-images.githubusercontent.com/108553499/210894961-32f6a44f-81dd-4165-a62b-d6a8d643d469.jpg)
+
+Or create your own game with our handy custom card generator!
+![cap3](https://user-images.githubusercontent.com/108553499/210894977-6e738c8d-538c-4ea0-ab29-e75294fa231f.jpg)
+
+And enjoy your game:
+![mockup](https://user-images.githubusercontent.com/108553499/210895084-0153ca6b-5901-4546-bbe0-87cdae339fff.jpg)
+Happy gaming!
+
 
 ## Contributing
 We're always looking for ways to improve our game and to simply make it more fun to use. If you'd like to make a suggestion on something that can be done better, we'd love to hear from you! Simply follow the steps below, or open an issue with the tag "enhancement" and we'll take a look ASAP
