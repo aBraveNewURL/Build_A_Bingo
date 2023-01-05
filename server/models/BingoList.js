@@ -32,9 +32,6 @@ const bingoListSchema = new Schema({
         "A list must contain 24 or more entries and each entry must be unique.",
     },
   },
-  // toJSON: {
-  //   virtuals: true,
-  // },
 });
 
 const BingoList = model("BingoList", bingoListSchema);
