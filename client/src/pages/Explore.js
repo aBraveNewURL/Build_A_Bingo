@@ -17,13 +17,17 @@ const Explore = () => {
 
   const lists = data?.lists || [];
 
-  lists.map((list, i) => {
-
-  })
 
   return (
     <main>
+
+      <div className={`container flex flex-wrap ${display}`}>
+
+        {loading ? <div>Loading...</div> : <OmniList lists={lists}></OmniList>}
+      </div>
+
         {loading ? <div>Loading...</div> : <ListPreviewCard lists={lists}></ListPreviewCard>}
+
       {/* <Play display={display}/> */}
       
     </main>

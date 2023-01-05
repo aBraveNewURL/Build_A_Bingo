@@ -4,7 +4,7 @@ import '../Bingo/Bingo.css'
 import OmniList from "../components/OmniList";
 import SubList from "../components/SubList";
 
-function Button () {
+function Button ({text}) {
     const [btnState, setBtnState] = useState(false);
 
     function handleClick(){
@@ -15,7 +15,7 @@ function Button () {
 
     return (
         <button className={`btn${toggleClassCheck} hover:bg-creme min-w-full min-h-full text-xs sm:text-sm md:text-base`} onClick={handleClick}
-        ></button>
+        >{text}</button>
     )
 };
 
