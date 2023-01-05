@@ -1,5 +1,6 @@
 // parentList parameter should be an array of bingo terms.
 // cardGenerator returns an array of objects corresponding to the cardSquareInput typeDef
+
 export const cardGenerator = function (parentList) {
     const locations = [
         "a1",

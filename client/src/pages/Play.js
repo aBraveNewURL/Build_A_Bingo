@@ -1,40 +1,38 @@
 import React, { useState } from "react";
-import MegaMenu from "../components/MegaMenuNav";
+import Game from "../Bingo/Bingo";
 import { useQuery, useMutation } from "@apollo/client";
 import { SAVE_CARD, SAVE_LIST } from "../utils/mutations";
 import { GET_LIST } from "../utils/queries";
 import { cardGenerator } from "../utils/cardGenerator";
+import { listRandomizer } from '../utils/listRandomizer';
 
-function Play({ parentListId }) {
-  // insert bingo grid, same as Home page
+function Play({ parentListId, display, randomizedList }) {
 
-  // create a useQuery to fetch the right list
+  //   create a useQuery to fetch the right list
   const { data } = useQuery(GET_LIST, {
     variables: { parentListId },
   });
 
-  console.log(data);
+  const [saveCard] = useMutation(SAVE_CARD);
 
-  const [saveCard, { loading }] = useMutation(SAVE_CARD);
+  // create a new BingoCard document in the database to go along with it
+//   const squares = cardGenerator(parentListList);
 
-  const parentList = data?.list;
-  console.log(parentList);
+//   const newCard = saveCard({
+//     variables: {
+//     //owner field should be the ID of the user who created whatever list has been selected
+//       owner: null,
+//       parentList: parentListId,
+//       squares: squares,
+//       status: false
+//     },
+//   });
 
-  const cardSquareInputArray = cardGenerator(parentList);
-
-  const newCard = saveCard({
-    variables: {
-      owner: null,
-      parentList: data?.name,
-      squares: cardSquareInputArray,
-    },
-  });
-
-  console.log(newCard);
-
-  // use some kind of loop to map each object in newCard onto the grid
-
-  return <MegaMenu />;
+  return (
+    <div className={display}>
+      {/* <Game squareContents={randomizedList}/> */}
+    </div>
+  );
 }
 
 export default Play;

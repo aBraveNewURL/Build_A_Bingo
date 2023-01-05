@@ -43,10 +43,9 @@ function App() {
       
         <div className="App">
           <MegaMenu />
-          {/* <Create /> */}
-          {/* <Explore /> */}
-          <Game />
-          <Play parentListId={parentListId}/>
+          <Create />
+          <Explore />
+          {/* <Game /> */}
         </div>
       
       </div>
