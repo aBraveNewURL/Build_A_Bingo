@@ -1,7 +1,7 @@
 const db = require('../config/connection');
 const { User, BingoList, BingoCard } = require('../models');
 const { emailList, usernameList, bingoList, } = require('./lists');
-const { createBingoCardData, getRandomIndex, getRandomIndexValue, createDummyUserData, getRandomNumber, createBingoListRandomNumberData, createBingoList, createBingoCard } = require('../utils/data');
+const { createBingoCardData, getRandomIndex, getRandomIndexValue, createDummyUserData, getRandomNumber, createBingoListRandomNumberData, createUser, createBingoList, createBingoCard } = require('../utils/data');
 
 db.once('open', async () => {
 
@@ -11,7 +11,10 @@ db.once('open', async () => {
 
     // create users list, then add them to the db
     const dummyUserData = createDummyUserData(usernameList, emailList, 10);
-    const users = await User.collection.insertMany(dummyUserData);
+    const users = await Promise.all(dummyUserData.map(async (user) => {
+        const newUser = await createUser(user);
+        return newUser;
+    }));
 
 
     const userIdForNewLists = await User.findOne({}).select('_id').exec();
