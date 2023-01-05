@@ -24,6 +24,7 @@ const Explore = () => {
   return (
     <main>
       <div className="container flex flex-wrap">
+
         {loading ? <div>Loading...</div> : <OmniList lists={lists}></OmniList>}
       </div>
       {/* <Play display={display}/> */}

@@ -1,14 +1,21 @@
+=======
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+
+import MegaMenu from "./components/MegaMenuNav";
+import Footer from "./components/Footer"
+
+import Explore from "./pages/Explore";
+import Create from "./pages/Create";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+
 import "./App.css";
 import "./Bingo/Bingo";
 import Game from "./Bingo/Bingo";
-import Explore from "./pages/Explore";
-import Create from "./pages/Create";
-import Play from "./pages/Play"
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
 import "./Bingo/Bingo.css";
-import MegaMenu from "./components/MegaMenuNav";
-import Footer from "./components/Footer"
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -37,17 +44,25 @@ const parentListId = "63b5f71b6d5c4f0f31c89700";
 
 function App() {
   return (
-    <ApolloProvider client={client}>
+      
+=======
     <div className="bg-gradient-to-br from-[#6ee073] to-[#E07863] via-blue-600">
       <div>
-      
-        <div className="App">
-          <MegaMenu />
-          <Create />
-          <Explore />
-          {/* <Game /> */}
-        </div>
-      
+      <ApolloProvider client={client}>
+        <Router>
+          <div className="App">
+              <MegaMenu />
+              <Routes>
+                <Route path='/' element={<Explore />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Signup />} />
+                <Route path='/new' element={<Create />} />
+                <Route path='/play' element={<Game />} />
+                  
+              </Routes>
+          </div>
+        </Router>
+      </ApolloProvider>
       </div>
       <Footer />
     </div>

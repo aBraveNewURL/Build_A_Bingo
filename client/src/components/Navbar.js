@@ -30,16 +30,16 @@ function Navbar() {
     <nav style={styles.nav}>
       <ul style={styles.ul}>
         <li style={styles.li}>
-          <a href="#" style={styles.a}>Create</a>
+          <a href="/#" style={styles.a}>Create</a>
         </li>
         <li style={styles.li}>
-          <a href="#" style={styles.a}>Explore</a>
+          <a href="/#" style={styles.a}>Explore</a>
         </li>
         <li style={styles.li}>
-          <a href="#" style={styles.a}>Profile</a>
+          <a href="/#" style={styles.a}>Profile</a>
         </li>
         <li style={styles.li}>
-          <a href="#" style={styles.a}>Login</a>
+          <a href="/#" style={styles.a}>Login</a>
         </li>
       </ul>
     </nav>
