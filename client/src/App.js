@@ -48,7 +48,7 @@ const parentListId = "63b5f71b6d5c4f0f31c89700";
 
 function App() {
   return (
-    <div className="bg-gradient-to-br from-[#6ee073] to-[#E07863] via-blue-600">
+    <div className="bg-gradient-to-br from-[#6ee073] to-[#E07863] via-blue-600 min-h-screen">
       <div>
         <ApolloProvider client={client}>
           <Router>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Button from './Button.jsx';
 
-const squareSize = "w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 xl:w-48 xl:h-48"
+const squareSize = "w-16 h-16 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40"
 
 let Game = ({gridContents}) => {
 
@@ -36,14 +36,6 @@ let Game = ({gridContents}) => {
 
     const shuffled = shuffle(newArray);
     console.log("SHUFFLED ARRAY", shuffled)
-
-    // const rig = (array) => {       
-    //         //pick a random index from the gridContents
-    //         let randomIndex = Math.floor(Math.random() * array.length);
-    //         array.splice(randomIndex, 1);
-    //         console.log("Spliced array: ", array)
-    //       return randomIndex;
-    // }
 
     return (
 

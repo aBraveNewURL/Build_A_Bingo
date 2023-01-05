@@ -17,9 +17,6 @@ const Explore = () => {
   const lists = data?.lists || [];
   console.log("Here are the lists from GET_LISTS: ", lists);
 
-  lists.map((list, i) => {
-
-  })
 
   return (
     <main>
