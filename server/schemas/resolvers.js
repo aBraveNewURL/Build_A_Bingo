@@ -39,6 +39,10 @@ const resolvers = {
       const lists = await BingoList.find({ owner: ownerId });
       return lists;
     },
+    cardsByUser: async (parent, { ownerId }, context) => {
+      const lists = await BingoCard.find({ owner: ownerId }).populate('BingoList');
+      return lists;
+    },
   },
 
   Mutation: {

@@ -29,3 +29,20 @@ query listsByUser($ownerId: ID!) {
         list
     }
 }`;
+
+export const GET_CARDS_BY_USER = gql`
+query cardsByUser($ownerId: ID!) {
+    cardsByUser(ownerId: $ownerId) {  
+        _id
+        owner
+        parentList
+        status
+        squares {
+            text
+            location
+            col
+            row
+            status
+        }
+    }
+}`;
