@@ -2,7 +2,8 @@ import { gql } from "@apollo/client";
 
 export const GET_LIST = gql`
 query getList($listId: ID!) {
-    list {     
+    list {  
+        _id   
         owner
         name
         list       
