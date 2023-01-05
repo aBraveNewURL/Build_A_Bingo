@@ -30,7 +30,7 @@ const OmniList = ({ lists }) => {
     <div className="container flex flex-wrap">
       {lists &&
         lists.map((list, index) => (
-          <div>
+          <div key={list._id}>
             <button style={styles.heading} dataindex={index} onClick={clickFunction}>{list.name}</button>
             <h4 style={styles.heading}></h4>
             {/* <SubList list={list.list} /> */}

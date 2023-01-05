@@ -7,7 +7,7 @@ const SubList = ({ list }) => {
         <ul className="">
           {list &&
             list.map((listItem) => (
-              <li>{listItem}</li>
+              <li key={listItem}>{listItem}</li>
             ))}
         </ul>
       );
