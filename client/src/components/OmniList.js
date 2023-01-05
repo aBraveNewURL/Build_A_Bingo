@@ -1,8 +1,7 @@
 // OmniList is used to display all the BingoList documents currently in the database
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import SubList from "./SubList";
-import Card from "./Card";
+import OmniListButton from './OmniListButton';
 import Game from "../Bingo/Bingo";
 import { listRandomizer } from "../utils/listRandomizer";
 import { cardGenerator } from "../utils/cardGenerator";
@@ -14,8 +13,7 @@ const styles = {
 
 const OmniList = ({ lists }) => {
   const [gridContents, setGridContents] = useState([]);
-
-  const [shown, setShown] = useState("container");
+  const [display, setDisplay] = useState(false);
 
   const [saveCard] = useMutation(SAVE_CARD);
 
@@ -26,13 +24,18 @@ const OmniList = ({ lists }) => {
   // const [gameHidden, setGameHidden] = useState(true);
 
   const clickFunction = async function (e) {
-    console.log("Button click result: ", gridContents)
+
     e.preventDefault();
 
     const buttonKey = e.target.getAttribute("dataindex");
     const subList = lists[buttonKey].list;
 
     console.log(subList);
+
+    setGridContents(subList);
+    setDisplay(!display);
+  }
+
 
     // transform the subList into a format that may be entered into a new BingoCard document
     // const cardSquareInputArray = cardGenerator(subList);
@@ -51,8 +54,7 @@ const OmniList = ({ lists }) => {
 
     // const randomizedList = listRandomizer(subList);
     // setGridContents([]);
-    setGridContents(subList);
-  };
+  
 
   // return (
   //   <div className="container flex flex-wrap">
@@ -80,7 +82,7 @@ const OmniList = ({ lists }) => {
   <div className="container flex flex-wrap">
     {lists && lists.map((list, index) => (
       <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md bg-opacity-0">
-          <button type="button" dataindex={index} onClick={clickFunction} className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl  focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">{list.name}</button>
+          <button type="button" onClick={clickFunction} dataindex={index} className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl  focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">{list.name}</button>
               {/* <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{list.name}</h5> */}
           {/* <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">A bingo list</p> */}
           {/* <a dataIndex={index} href="#" onClick={clickFunction} className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -89,7 +91,7 @@ const OmniList = ({ lists }) => {
           </a> */}
       </div>
     ))}
-  <div className={`${shown}`}>
+  <div className={display ? "container" : "hidden"}>
       <Game gridContents={gridContents} />
     </div>
   </div>

@@ -161,10 +161,12 @@ function Create() {
   //       });
   //   }
 
+  
+
   return (
-    <div className="">
+    <div>
       <div>Choose a name for your bingo list and enter text for each square one at a time. Your list will be randomized in a later step, so order does not matter. </div>
-      <div className="my-2">
+      <div className="my-2 w-full">
         {textArea ? `Message: ${textArea}` : `${textArea}`}
       </div>
       <input
@@ -176,7 +178,7 @@ function Create() {
         maxLength={34}
       ></input>
       <button
-        className="mx-5"
+        className="mx-5 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
         type="button"
         onClick={function () {
           setlistName(listName);
@@ -200,7 +202,7 @@ function Create() {
         maxLength={34}
       ></input>
       <button
-        className="mx-5"
+        className="mx-5 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
         type="button"
         onClick={function () {
           setSquareList([...squareList, squareText]);
@@ -212,7 +214,7 @@ function Create() {
         Next Square
       </button>
       <button
-        className="mx-5"
+        className="mx-5 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
         type="button"
         onClick={function () {
           setSquareList([]);
@@ -225,7 +227,7 @@ function Create() {
         Reset
       </button>
       <button
-        className="mx-5"
+        className="mx-5 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
         type="button"
         onClick={function () {
           if (!listName || squareList.length < 24) {
@@ -246,6 +248,6 @@ function Create() {
       </div>
     </div>
   );
-}
+};
 
 export default Create;
