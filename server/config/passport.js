@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const volunteer = mongoose.model('Volunteer');
+const bingoCard = mongoose.model('bingoCard');
 const passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
@@ -18,15 +18,15 @@ passport.deserializeUser(function(id, done) {
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    volunteer.findOne({ username: username }, function(err, volunteer) {
+    bingoCard.findOne({ username: username }, function(err, bingoCard) {
       if (err) { return done(err); }
-      if (!volunteer) {
+      if (!bingoCard) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      if (!volunteer.validPassword(password)) {
+      if (!bingoCard.validPassword(password)) {
         return done(null, false, { message: 'Incorrect password.' });
       }
-      return done(null, volunteer);
+      return done(null, bingoCard);
     });
   }
 ));
