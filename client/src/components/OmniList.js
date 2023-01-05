@@ -16,7 +16,7 @@ const OmniList = ({ lists }) => {
     <div className="container">
       {lists &&
         lists.map((list) => (
-          <div>
+          <div key={list._id}>
             <h3 style={styles.heading}>{list.name}</h3>
             <SubList list={list.list} />
           </div>

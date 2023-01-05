@@ -10,6 +10,7 @@ import Explore from "./pages/Explore";
 import Create from "./pages/Create";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import { StoreProvider } from './utils/GlobalState';
 
 import "./App.css";
 import "./Bingo/Bingo";
@@ -44,17 +45,19 @@ function App() {
       <div>
       <ApolloProvider client={client}>
         <Router>
-          <div className="App">
-              <MegaMenu />
-              <Routes>
-                <Route path='/' element={<Explore />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/signup' element={<Signup />} />
-                <Route path='/new' element={<Create />} />
-                <Route path='/play' element={<Game />} />
-                  
-              </Routes>
-          </div>
+          <StoreProvider>
+            <div className="App">
+                <MegaMenu />
+                <Routes>
+                  <Route path='/' element={<Explore />} />
+                  <Route path='/login' element={<Login />} />
+                  <Route path='/signup' element={<Signup />} />
+                  <Route path='/new' element={<Create />} />
+                  <Route path='/play' element={<Game />} />
+            
+                </Routes>
+            </div>
+          </StoreProvider>
         </Router>
       </ApolloProvider>
       </div>

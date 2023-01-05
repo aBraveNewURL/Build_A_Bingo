@@ -12,6 +12,7 @@ query getList($listId: ID!) {
 export const GET_LISTS = gql`
 query getLists {
     lists {
+        _id
         owner
         name
         list
