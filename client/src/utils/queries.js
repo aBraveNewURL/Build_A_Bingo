@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_LIST = gql`
-query getList($listId: ID!) {
-    list {  
+query list($listId: ID!) {
+    list(listId: $listId) {  
         _id   
         owner
         name
@@ -11,8 +11,18 @@ query getList($listId: ID!) {
 }`;
 
 export const GET_LISTS = gql`
-query getLists {
+query lists {
     lists {
+        _id
+        owner
+        name
+        list
+    }
+}`;
+
+export const GET_LISTS_BY_USER = gql`
+query listsByUser($ownerId: ID!) {
+    listsByUser(ownerId: $ownerId) {  
         _id
         owner
         name

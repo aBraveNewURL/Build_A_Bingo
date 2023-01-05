@@ -23,7 +23,6 @@ const OmniList = ({ lists }) => {
     const subList = lists[buttonKey].list;
     // console.log(subList);
     setGridContents(subList);
-    //get list.list
   }
 
   return (

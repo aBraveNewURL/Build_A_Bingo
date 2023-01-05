@@ -53,6 +53,7 @@ type Query {
     cards: [BingoCard]
     list(listId: ID!): BingoList
     lists: [BingoList]!
+    listsByUser(ownerId: ID!): [BingoList]!
 }
 
 type Mutation {

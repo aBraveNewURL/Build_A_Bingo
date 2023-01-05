@@ -13,8 +13,6 @@ class AuthService {
   isTokenExpired(token) {
     const decoded = decode(token);
     if (decoded.exp < Date.now() / 1000) {
-      console.log('token is expired:', decoded.exp);
-      console.log('current time:', Date.now());
       localStorage.removeItem('id_token');
       return true;
     }
@@ -27,13 +25,11 @@ class AuthService {
 
   login(idToken) {
     localStorage.setItem('id_token', idToken);
-    console.log('login!');
     window.location.assign('/');
   }
 
   logout() {
     localStorage.removeItem('id_token');
-    console.log('logout');
     window.location.reload();
   }
 }

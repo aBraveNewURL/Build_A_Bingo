@@ -7,17 +7,23 @@ import Explore from '../pages/Explore';
 import OmniList from './OmniList';
 
 function MegaMenu(props) {
-    console.log('status:', Auth.loggedIn());
-    let authMenu;
+    let authMyLists;
+    let authMyCards;
+    let authBtns;
     if (Auth.loggedIn()) {
-        authMenu =
-        <div className="flex items-center md:order-2">
+        authMyLists = <Link to="/mylists" className="block py-2 pl-3 pr-4 text-gray-700  hover:bg-gray-50 md:hover:bg-transparent border-0 md:hover:text-blue-600 md:p-0 dark:text-gray-400 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">My Lists</Link>;
+        authMyCards = <Link to="/mycards" className="block py-2 pl-3 pr-4 text-gray-700  hover:bg-gray-50 md:hover:bg-transparent border-0 md:hover:text-blue-600 md:p-0 dark:text-gray-400 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">My Cards</Link>;
+        authBtns =
+            <div className="flex items-center md:order-2">
 
                 <Link to="/" onClick={() => Auth.logout()} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Logout</Link>
             </div>;
     } else {
-        authMenu =
-        <div className="flex items-center md:order-2">
+        authMyLists = <></>;
+        authMyCards = <></>;
+
+        authBtns =
+            <div className="flex items-center md:order-2">
 
 
                 <Link to="/signup" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 mr-1 md:mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Sign up</Link>
@@ -39,7 +45,11 @@ function MegaMenu(props) {
                         </li>
 
                         <li>
-                            <Link to="/cards" className="block py-2 pl-3 pr-4 text-gray-700  hover:bg-gray-50 md:hover:bg-transparent border-0 md:hover:text-blue-600 md:p-0 dark:text-gray-400 md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">Cards</Link>
+                            {authMyLists}
+                        </li>
+                        <li>
+                            {authMyCards}
+
                             {/* cards route needed ^^^ */}
                             <div id="mega-menu-dropdown" className="absolute z-10 grid hidden w-auto grid-cols-2 text-sm bg-white border border-gray-100 rounded-lg shadow-md dark:border-gray-700 md:grid-cols-3 dark:bg-gray-700">
                             </div>
@@ -48,7 +58,7 @@ function MegaMenu(props) {
                     </ul>
                 </div>
 
-                    {authMenu}
+                {authBtns}
 
             </div>
 

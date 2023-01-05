@@ -7,7 +7,11 @@ import MegaMenu from "./components/MegaMenuNav";
 import Footer from "./components/Footer";
 
 import Explore from "./pages/Explore";
+
 import Create from "./pages/Create";
+import MyBingoLists from './pages/MyBingoLists';
+import List from './components/BingoList/List';
+
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 
@@ -44,16 +48,20 @@ const parentListId = "63b5f71b6d5c4f0f31c89700";
 function App() {
   return (
 
-    <div className="bg-gradient-to-br from-[#6ee073] to-[#E07863] via-blue-600">
+    <div className="bg-gradient-to-br from-[#6ee073] to-[#E07863] via-blue-600 min-h-screen">
       <div>
         <ApolloProvider client={client}>
           <Router>
             <div className="App">
               <MegaMenu />
               <Routes>
-                <Route path='/' element={<Explore />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<Signup />} />
+
+                <Route path='/' element={<Explore />} />
+
+                <Route path='/list/:id' element={<List />} />
+                <Route path='/mylists/' element={<MyBingoLists />} />
                 <Route path='/new' element={<Create />} />
                 <Route path='/play' element={<Game />} />
 
