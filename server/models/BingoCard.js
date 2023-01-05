@@ -73,6 +73,9 @@ const bingoCardSchema = new Schema(
   {
     toJSON: {
       virtuals: true
+    },
+    toObject: {
+      virtuals: true
     }
   }
 );
