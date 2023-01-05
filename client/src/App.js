@@ -1,17 +1,15 @@
-=======
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
 import MegaMenu from "./components/MegaMenuNav";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
 
 import Explore from "./pages/Explore";
 import Create from "./pages/Create";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import { StoreProvider } from './utils/GlobalState';
 
 import "./App.css";
 import "./Bingo/Bingo";
@@ -28,10 +26,10 @@ const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
   return {
-      headers: {
-          ...headers,
-          authorization: token ? `Bearer ${token}` : "",
-      },
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
   };
 });
 const client = new ApolloClient({
@@ -45,31 +43,27 @@ const parentListId = "63b5f71b6d5c4f0f31c89700";
 
 function App() {
   return (
-      
-=======
+
     <div className="bg-gradient-to-br from-[#6ee073] to-[#E07863] via-blue-600">
       <div>
-      <ApolloProvider client={client}>
-        <Router>
-          <StoreProvider>
+        <ApolloProvider client={client}>
+          <Router>
             <div className="App">
-                <MegaMenu />
-                <Routes>
-                  <Route path='/' element={<Explore />} />
-                  <Route path='/login' element={<Login />} />
-                  <Route path='/signup' element={<Signup />} />
-                  <Route path='/new' element={<Create />} />
-                  <Route path='/play' element={<Game />} />
-            
-                </Routes>
+              <MegaMenu />
+              <Routes>
+                <Route path='/' element={<Explore />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Signup />} />
+                <Route path='/new' element={<Create />} />
+                <Route path='/play' element={<Game />} />
+
+              </Routes>
             </div>
-          </StoreProvider>
-        </Router>
-      </ApolloProvider>
+          </Router>
+          <Footer />
+        </ApolloProvider>
       </div>
-      <Footer />
     </div>
-    </ApolloProvider>
   );
 }
 
