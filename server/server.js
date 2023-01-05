@@ -1,6 +1,7 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 
+
 require('dotenv').config();
 const path = require('path');
 
@@ -16,6 +17,21 @@ const server = new ApolloServer({
   resolvers,
   context: authMiddleware
 });
+//passport
+const passport = require('passport');
+
+//
+app.use(passport.initialize());
+app.use(passport.session({ 
+  secret: "uwu", 
+  name: "uwu",
+  // store: "sessionStore", 
+  // connect-mongo session store
+  proxy: true,
+  resave: true,
+  saveUninitialized: true
+  }));
+
 
 app.use(
   express.urlencoded({ extended: false }),
