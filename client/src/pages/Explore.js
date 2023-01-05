@@ -14,7 +14,7 @@ const Explore = () => {
 
   return (
     <main>
-      <div class="container">
+      <div className="container">
         {loading ? <div>Loading...</div> : <OmniList lists={lists}></OmniList>}
       </div>
       
