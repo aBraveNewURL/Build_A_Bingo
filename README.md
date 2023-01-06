@@ -6,7 +6,7 @@ The possibilities are endless! Play solo or create your own cards and challenge 
 
 ## Getting Started
 
-You can reach the deployed page on Heroku at: !! DEPLOYED LINK NEEDED !!
+You can reach the deployed page on Heroku at: https://build-a-bingo.herokuapp.com/
 
 If you prefer to do so, you may also download and run our application locally by following the steps below 
 
