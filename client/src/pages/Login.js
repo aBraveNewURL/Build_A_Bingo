@@ -32,13 +32,9 @@ function Login(props) {
   return (
     // <div className="container my-1">
     //   <Link to="/signup">← Go to Signup</Link>
-    <div class="text-xl font-semibold mt-2 pt-1 mb-0">
-    Don't have an account?
-    <Link to="/signup" className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">
-Register
-</Link>
     
-
+    
+<div>
 <h2 className="font-semibold text-2xl text-center my-4">Login</h2>
 <form className='mx-auto max-w-sm' onSubmit={handleFormSubmit}>
   <div className="mb-6 flex-row">
@@ -75,6 +71,13 @@ Register
     <button className='' type="submit">Login</button>
   </div>
 </form>
+<div class="text-xl font-semibold mt-2 pt-1 mb-0 rounded-md shadow-md bg-navy-700 text-white">
+  Don't have an account?
+  <Link to="/signup" className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">
+    Register
+  </Link>
+</div>
+
 </div>
   );
 }
