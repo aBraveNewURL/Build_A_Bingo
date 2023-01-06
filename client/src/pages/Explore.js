@@ -27,8 +27,6 @@ const Explore = () => {
       </div> */}
 
         {loading ? <div>Loading...</div> : <ListPreviewCard lists={lists}></ListPreviewCard>}
-
-      {/* <Play display={display}/> */}
       
     </main>
     
