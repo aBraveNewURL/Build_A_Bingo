@@ -4,9 +4,7 @@ import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import { GET_LISTS_BY_USER } from '../utils/queries';
 import Auth from '../utils/auth';
-// import SubList from "../SubList";
-// import Card from "../Card";
-// import Game from '../../Bingo/Bingo';
+
 
 function MyBingoLists(props) {
   const info = Auth.getProfile();
