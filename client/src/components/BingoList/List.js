@@ -7,7 +7,7 @@ import { GET_LIST } from '../../utils/queries';
 // import Game from '../../Bingo/Bingo';
 
 const List = (props) => {
-    let listId = window.location.pathname.split('/').pop()
+  let listId = window.location.pathname.split('/').pop();
 
   const { data } = useQuery(GET_LIST, {
     variables: { listId },
