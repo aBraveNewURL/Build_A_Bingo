@@ -48,3 +48,16 @@ mutation saveList($owner: ID, $name: String!, $list: [String]!) {
     }
 }`
 
+
+export const UPDATE_CARD = gql`
+    mutation updateCard($cardId: ID!, $square: CardSquareInput!) {
+        updateCard(cardId: $cardId, square: $square) {
+            _id
+            squares {
+            location
+            status
+            }
+            status
+        }
+    }
+`;

@@ -10,8 +10,9 @@ import Explore from "./pages/Explore";
 
 import Create from "./pages/Create";
 import MyBingoLists from './pages/MyBingoLists';
-import MyBingoCards from './pages/MyBingoCards';
 import List from './components/BingoList/List';
+import MyBingoCards from './pages/MyBingoCards';
+import Card from './components/BingoCard/Card';
 
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -61,6 +62,8 @@ function App() {
                 <Route path='/' element={<Explore />} />
 
                 <Route path='/list/:id' element={<List />} />
+                <Route path='/card/:id' element={<Card />} />
+
                 <Route path='/mylists/' element={<MyBingoLists />} />
                 <Route path='/mycards/' element={<MyBingoCards />} />
                 <Route path='/new' element={<Create />} />
