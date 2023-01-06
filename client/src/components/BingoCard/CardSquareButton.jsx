@@ -11,6 +11,9 @@ function CardSquareButton ({cardId, squareStatus, location, text}) {
 
     async function handleClick(e) {
         e.preventDefault();
+        if(e.target.dataset.location === 'c3') {
+            return
+        }
         const btnStatus = (e.target.dataset.squarestatus == 'false');
         setBtnState(btnState => !btnState);
         const updatedCard = await saveCard({
