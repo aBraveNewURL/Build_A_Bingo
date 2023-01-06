@@ -20,19 +20,38 @@ const resolvers = {
       return users;
     },
     card: async (parent, { cardId }) => {
-      const card = await BingoCard.findOne({ _id: cardId });
+      const card = await BingoCard.findOne({ _id: cardId })
+        .populate('owner')
+        .populate('parentList');
       return card;
     },
     cards: async (parent, args) => {
-      const cards = await BingoCard.find({});
+      const cards = await BingoCard.find({})
+      .populate('owner');
       return cards;
     },
     list: async (parent, { listId }) => {
-      const list = await BingoList.findOne({ _id: listId });
+      const list = await BingoList.findById({ _id: listId })
+      .populate('owner');
       return list;
     },
     lists: async (parent, args) => {
-      const lists = await BingoList.find({});
+      const lists = await BingoList.find({})
+        .populate('owner');
+      return lists;
+    },
+    listsByUser: async (parent, { ownerId }, context) => {
+      const lists = await BingoList.find({ owner: ownerId })
+        .populate('owner');
+      return lists;
+    },
+    cardsByUser: async (parent, { ownerId }, context) => {
+      const lists = await BingoCard.find({ owner: ownerId })
+        .populate({
+          path: 'parentList',
+          populate: 'owner'
+        })
+        .populate('owner');
       return lists;
     },
   },
@@ -45,23 +64,23 @@ const resolvers = {
     },
     deleteCard: async (parent, { cardId }, context) => {
       // if (context.user) {
-      await BingoCard.findOneAndDelete({ _id: cardId });
+        await BingoCard.findOneAndDelete({ _id: cardId });
 
-      // const updatedCards = BingoCard.find({});
-      // return updatedCards.map((card) => {
-      //   card.toJSON();
-      // });
+        // const updatedCards = BingoCard.find({});
+        // return updatedCards.map((card) => {
+        //   card.toJSON();
+        // });
       // }
       // throw new AuthenticationError("You need to be logged in!");
     },
     deleteList: async (parent, { listId }, context) => {
       // if (context.user) {
-      await BingoList.findOneAndDelete({ _id: listId }, { new: true });
+        await BingoList.findOneAndDelete({ _id: listId }, { new: true });
 
-      const updatedLists = BingoList.find({});
-      return updatedLists.map((list) => {
-        list.toJSON();
-      });
+        const updatedLists = BingoList.find({});
+        return updatedLists.map((list) => {
+          list.toJSON();
+        });
       // }
       // throw new AuthenticationError("You need to be logged in!");
     },
@@ -82,21 +101,23 @@ const resolvers = {
 
       return { token, user };
     },
-    saveCard: async (parent, { owner, parentList, squares, status }) => {
-      // try {
-        const newCard = await BingoCard.create({ owner, parentList, squares, status });
-        return newCard;
-      // } catch (err) {
-      //   console.log ("Status: ", err.extensions.response.status, "Message: ", err.extensions.response.body);
-      // }
+    saveCard: async (parent, { owner, parentList, squares }) => {
+      const newCard = await BingoCard.create({ owner, parentList, squares });
+      return newCard;
     },
     saveList: async (parent, { owner, name, list }) => {
       const newList = await BingoList.create({ owner, name, list });
       return newList;
     },
     // Currently expects an array of 1 item. We can change this to expect specific properties: (squareLocation, squareStatus) if that would be better
-    updateSquare: async (parent, { cardId, squares }) => {
-      const card = await BingoCard.findOneAndUpdate({ _id: cardId, "squares.location": squares.location }, { $set: { "squares.$.status": squares.status } }, { new: true });
+    updateCard: async (parent, { cardId, square }) => {
+      console.log(square);
+      let card = await BingoCard.findOneAndUpdate({ _id: cardId, "squares.location": square.location }, { $set: { "squares.$.status": square.status } }, { new: true });
+      // console.log(card);
+      const winStatus = checkWin(card);
+      if (winStatus !== card.status) {
+        card = await BingoCard.findOneAndUpdate({ _id: cardId }, { $set: { status: card.status } }, { new: true });
+      }
       return card;
     },
   },

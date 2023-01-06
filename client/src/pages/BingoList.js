@@ -4,11 +4,11 @@ import Play from './Play'
 import { useQuery } from "@apollo/client";
 
 import OmniList from "../components/OmniList";
-import ListPreviewCard from '../components/BingoList/ListPreviewCard';
+import {default as ListCard } from '../components/BingoList/ListPreviewCard';
 
 import { GET_LISTS } from "../utils/queries";
 
-const Explore = () => {
+const BingoList = () => {
   // useState determines whether or not to show the game grid. Should be attached to a button somewhere
   const [display, setDisplay] = useState("hidden");
   const [parentListId, setParentListId] = useState("")
@@ -17,20 +17,18 @@ const Explore = () => {
 
   const lists = data?.lists || [];
 
+  lists.map((list, i) => {
+
+  })
 
   return (
     <main>
-
-      {/* <div className={`container flex flex-wrap ${display}`}>
-
-        {loading ? <div>Loading...</div> : <OmniList lists={lists}></OmniList>}
-      </div> */}
-
-        {loading ? <div>Loading...</div> : <ListPreviewCard lists={lists}></ListPreviewCard>}
+        {loading ? <div>Loading...</div> : <ListCard lists={lists}></ListCard>}
+      {/* <Play display={display}/> */}
       
     </main>
     
   );
 };
 
-export default Explore;
+export default BingoList;

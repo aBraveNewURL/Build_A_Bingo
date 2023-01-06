@@ -12,15 +12,15 @@ type User {
 
 type BingoList {
     _id: ID
-    owner: ID
+    owner: User
     name: String!
     list: [String]!
 }
 
 type BingoCard {
     _id: ID
-    owner: ID
-    parentList: ID
+    owner: User
+    parentList: BingoList
     squares: [CardSquare]!
     status: Boolean
 }
@@ -52,7 +52,9 @@ type Query {
     card(cardId: ID!): BingoCard
     cards: [BingoCard]
     list(listId: ID!): BingoList
-    lists: [BingoList]!
+    lists: [BingoList]
+    listsByUser(ownerId: ID!): [BingoList]
+    cardsByUser(ownerId: ID!): [BingoCard]
 }
 
 type Mutation {
@@ -62,7 +64,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
     saveCard(owner: ID, parentList: ID, squares: [CardSquareInput]!, status: Boolean): BingoCard
     saveList(owner: ID, name: String!, list: [String]!): BingoList
-    updateSquare(cardId: ID!, squares: CardSquareInput!): BingoCard
+    updateCard(cardId: ID!, square: CardSquareInput!): BingoCard
 }
 
 `;

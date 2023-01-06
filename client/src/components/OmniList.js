@@ -80,7 +80,6 @@ const OmniList = ({ lists }) => {
         >
           <Game gridContents={gridContents} />
         </div>
-      
     </div>
   );
 };
