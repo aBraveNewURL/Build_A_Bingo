@@ -12,8 +12,6 @@ export default function OmniListButton({ index, name, clicks, currentlyHidden })
     } else {
         setDisplay("container");
     }
-    console.log(clickCount);
-    console.log(display);
   }
 
   return (

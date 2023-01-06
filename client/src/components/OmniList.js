@@ -29,8 +29,6 @@ const OmniList = ({ lists }) => {
     const buttonKey = e.target.getAttribute("dataindex");
     const subList = lists[buttonKey].list;
 
-    console.log(subList);
-
     setGridContents(subList);
     setDisplay(!display);
   };

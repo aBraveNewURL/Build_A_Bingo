@@ -77,87 +77,67 @@ module.exports = {
                     break;
             }
         }
-        colA.every((i) => {
+        anyWin.push(colA.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
-        colB.every((i) => {
+            return win;
+        }));
+        anyWin.push(colB.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
-        colC.every((i) => {
+            return win;
+        }));
+        anyWin.push(colC.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
-        colD.every((i) => {
+            return win;
+        }));
+        anyWin.push(colD.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
-        colE.every((i) => {
+            return win;
+        }));
+        anyWin.push(colE.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
-        row1.every((i) => {
+            return win;
+        }));
+        anyWin.push(row1.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
-        row2.every((i) => {
+            return win;
+        }));
+        anyWin.push(row2.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
-        row3.every((i) => {
+            return win;
+        }));
+        anyWin.push(row3.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
-        row4.every((i) => {
+            return win;
+        }));
+        anyWin.push(row4.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
-        row5.every((i) => {
+            return win;
+        }));
+        anyWin.push(row5.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
-        diaTLBR.every((i) => {
+            return win;
+        }));
+        anyWin.push(diaTLBR.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
-        diaBLTR.every((i) => {
+            return win;
+        }));
+        anyWin.push(diaBLTR.every((i) => {
             const win = (i === true);
-            anyWin.push(win)
-            winStatus = true;
-            return win
-        });
+            return win;
+        }));
         anyWin.some((i) => {
             const win = (i === true);
-            winStatus = true;
-            return win
+            if(win) {
+                winStatus = true;
+                return win;
+            }
+            return win;
         });
         blackoutWin = anyWin.every((i) => {
             const win = (i === true);
-            blackoutWin = true;
-            return win
+            if (win) {
+                blackoutWin = true;
+            }
         });
         return winStatus;
     },

@@ -10,7 +10,7 @@ const createDummyUserData = (usernameArr, emailArr, count) => {
     const dummyUsers = [];
 
     if (count > uniqueAccountLimit) {
-        console.log(`Unable to make ${count} unique accounts. Only ${uniqueAccountLimit} accounts will be made.`);
+        console.info(`Unable to make ${count} unique accounts. Only ${uniqueAccountLimit} accounts will be made.`);
         count = uniqueAccountLimit;
     }
 
@@ -60,6 +60,7 @@ const createBingoCardData = async (bingoListId, ownerId) => {
     const cardData = {
         owner: ownerId,
         parentList: bingoListId,
+        status: false
     };
 
     cardData.squares = locations.map((loc) => {
@@ -76,10 +77,7 @@ const createBingoCardData = async (bingoListId, ownerId) => {
 
         return square;
     });
-
-
     return cardData;
-
 };
 
 const createUser = async (userData) => {
@@ -95,7 +93,8 @@ const createBingoList = async (bingoListData) => {
 };
 
 const createBingoCard = async (bingoCardData) => {
-    const bingoCard = await BingoCard.create(bingoCardData);
+    const bingoCard = await BingoCard.create(bingoCardData)
+    .then(card => card.populate('parentList'));
     bingoCard.save();
     return bingoCard;
 };

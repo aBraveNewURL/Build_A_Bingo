@@ -8,7 +8,7 @@ function Create() {
   const [squareNumber, setSquareNumber] = useState(1);
   const [squareList, setSquareList] = useState([]);
   const [textArea, setTextArea] = useState("");
-  const [listDiv, setListDiv] = useState([<li>{squareText}</li>]);
+  const [listDiv, setListDiv] = useState([<li key={squareText}>{squareText}</li>]);
 
   const [saveCard] = useMutation(SAVE_CARD);
   const [saveList] = useMutation(SAVE_LIST);

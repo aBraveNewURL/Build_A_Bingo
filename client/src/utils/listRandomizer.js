@@ -40,16 +40,4 @@ export function listRandomizer(parentList) {
   const shuffled = shuffle(newArray);
 
   return shuffled;
-
-  // for (let i = 0; i < 24; i++) {
-
-  //   //pick a random index from the parentList
-  //   let randomIndex = Math.floor(Math.random() * parentList.length);
-  //   listCopy.push(parentList[randomIndex]);
-  //   parentList.splice(randomIndex, 1);
-  // };
-
-  // console.log("New array: ", listCopy);
-
-  // return listCopy;
 }

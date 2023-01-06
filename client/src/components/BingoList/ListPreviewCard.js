@@ -25,7 +25,6 @@ const ListPreviewCard = ({ lists }) => {
         lists.map((list, index) => (
           <div key={list._id}>
             <Link dataindex={list._id} to={`/list/${list._id}`}><button className="p-3 m-1">{list.name}</button></Link>
-            {/* <SubList list={list.list} /> */}
           </div>
         ))}
         

@@ -22,12 +22,34 @@ export const LOGIN = gql`
     }
 `;
 
+export const CREATE_CARD = gql`
+    mutation createCard($ownerId: ID, $parentListId: ID) {
+        createCard(ownerId: $ownerId, parentListId: $parentListId) {
+            _id
+            parentList {
+                name
+            }
+            squares {
+            location
+            status
+            text
+            }
+            status
+        }
+    }
+`;
+
 export const SAVE_CARD = gql`
     mutation saveCard($owner: ID, $parentList: ID, $squares: [CardSquareInput]!, $status: Boolean) {
         saveCard(owner: $owner, parentList: $parentList, squares: $squares, status: $status) {
             _id
-            owner
-            parentList
+            owner {
+                username
+                email
+            }
+            parentList {
+                name
+            }
             squares {
             location
             status
@@ -42,7 +64,10 @@ export const SAVE_LIST = gql`
 mutation saveList($owner: ID, $name: String!, $list: [String]!) {
     saveList(owner: $owner, name: $name, list: $list) {
         _id
-        owner
+        owner {
+                username
+                email
+            }
         name
         list
     }
@@ -53,11 +78,11 @@ export const UPDATE_CARD = gql`
     mutation updateCard($cardId: ID!, $square: CardSquareInput!) {
         updateCard(cardId: $cardId, square: $square) {
             _id
+            status
             squares {
             location
             status
             }
-            status
         }
     }
 `;

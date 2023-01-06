@@ -19,7 +19,6 @@ function MyBingoCards(props) {
     return <h3>No bingo cards yet. Create one to get started!</h3>;
   }
   const cards = data.cardsByUser;
-  console.log('cards', cards);
 
   return (
     <div className="container flex flex-wrap">

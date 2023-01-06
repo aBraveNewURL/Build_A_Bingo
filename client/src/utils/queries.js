@@ -4,6 +4,7 @@ export const GET_CARD = gql`
 query card($cardId: ID!) {
     card(cardId: $cardId) {  
         _id   
+        status       
         owner {
             username
             email
@@ -18,7 +19,6 @@ query card($cardId: ID!) {
             row
             status
         }
-        status       
     }
 }`;
 
@@ -65,21 +65,21 @@ export const GET_CARDS_BY_USER = gql`
 query cardsByUser($ownerId: ID!) {
     cardsByUser(ownerId: $ownerId) {  
         _id
+        status
         owner {
             username
             email
         }
         parentList {
+            name
             owner {
                 username
                 email
             }
-            name
         }
-        status
         squares {
-            text
             location
+            text
             col
             row
             status

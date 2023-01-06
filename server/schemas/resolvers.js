@@ -2,6 +2,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, BingoCard, BingoList } = require("../models");
 const { signToken } = require("../utils/auth");
 const { checkWin } = require('../utils/bingo');
+const { createBingoCard, createBingoCardData } = require('../utils/data');
 
 const resolvers = {
   Query: {
@@ -101,6 +102,11 @@ const resolvers = {
 
       return { token, user };
     },
+    createCard: async (parent, { ownerId, parentListId }) => {
+      const cardData = await createBingoCardData(parentListId, ownerId)
+      const card = await createBingoCard(cardData);
+      return card;
+    },
     saveCard: async (parent, { owner, parentList, squares }) => {
       const newCard = await BingoCard.create({ owner, parentList, squares });
       return newCard;
@@ -111,12 +117,10 @@ const resolvers = {
     },
     // Currently expects an array of 1 item. We can change this to expect specific properties: (squareLocation, squareStatus) if that would be better
     updateCard: async (parent, { cardId, square }) => {
-      console.log(square);
       let card = await BingoCard.findOneAndUpdate({ _id: cardId, "squares.location": square.location }, { $set: { "squares.$.status": square.status } }, { new: true });
-      // console.log(card);
       const winStatus = checkWin(card);
       if (winStatus !== card.status) {
-        card = await BingoCard.findOneAndUpdate({ _id: cardId }, { $set: { status: card.status } }, { new: true });
+        card = await BingoCard.findOneAndUpdate({ _id: cardId }, { $set: { status: winStatus } }, { new: true });
       }
       return card;
     },

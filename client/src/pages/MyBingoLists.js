@@ -19,7 +19,6 @@ function MyBingoLists(props) {
   }
 
   const lists = data.listsByUser;
-  console.log('lists', lists);
 
   return (
     <div className="container flex flex-wrap">

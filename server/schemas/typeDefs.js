@@ -62,6 +62,7 @@ type Mutation {
     deleteCard(cardId: ID!): [BingoCard]
     deleteList(listId: ID!): [BingoList]
     login(email: String!, password: String!): Auth
+    createCard(ownerId: ID, parentListId: ID): BingoCard
     saveCard(owner: ID, parentList: ID, squares: [CardSquareInput]!, status: Boolean): BingoCard
     saveList(owner: ID, name: String!, list: [String]!): BingoList
     updateCard(cardId: ID!, square: CardSquareInput!): BingoCard

@@ -1,17 +1,34 @@
 import React, { useState } from "react";
-import { useQuery } from '@apollo/client';
-import { Link } from 'react-router-dom';
+import Auth from '../../utils/auth';
+import { useQuery, useMutation } from '@apollo/client';
 import { GET_LIST } from '../../utils/queries';
-// import SubList from "../SubList";
-// import Card from "../Card";
-// import Game from '../../Bingo/Bingo';
+import { CREATE_CARD } from '../../utils/mutations';
+import { Link } from 'react-router-dom';
+
 
 const List = (props) => {
   let listId = window.location.pathname.split('/').pop();
-
+  const user = Auth.getProfile();
+  const userId = user.data._id;
+  const [createCard] = useMutation(CREATE_CARD)
   const { data } = useQuery(GET_LIST, {
     variables: { listId },
   });
+  
+  async function handleClick(e) {
+    e.preventDefault();
+    const user = e.target.dataset.userid;
+    const parentList = e.target.dataset.listid
+
+    const newCard = await createCard({
+      variables: {
+        ownerId: user,
+        parentListId: parentList
+      }
+    });
+  } 
+
+  
   if (!data) {
       return <h3>No bingo list data. Create one to get started!</h3>;
     } 
@@ -31,7 +48,7 @@ const List = (props) => {
             ))
             }
       </ol>
-        
+        {Auth.loggedIn() ? <button data-userid={userId} data-listid={_id} onClick={handleClick}>Create a Card</button> : ''}
     </div>
     
   );

@@ -14,6 +14,7 @@ const squareSchema = new Schema(
     },
     status: {
       type: Boolean,
+      default: false
     },
   },
   {
@@ -43,6 +44,10 @@ const bingoCardSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "BingoList",
     },
+    status: {
+      type: Boolean,
+      default: false
+    },
     squares:
     {
       type: [squareSchema],
@@ -52,7 +57,7 @@ const bingoCardSchema = new Schema(
         validator: function (arr) {
           function checkUnique() {
             for (let i = 0; i < arr.length; i++) {
-              if (arr[i].location === /[c][3]/) {
+              if (arr[i].location === /[c][3]/ && arr[i].text !== "FREE" && arr[i].status !== true) {
                 return false;
               }
               for (let j = i + 1; j < arr.length; j++) {
@@ -64,6 +69,7 @@ const bingoCardSchema = new Schema(
             return true;
           }
           return arr.length >= 24 && checkUnique();
+
         },
         message:
           "A card must contain 24 or more squares and each square must have a unique address between a1 and e5. C3 may not be used.",
