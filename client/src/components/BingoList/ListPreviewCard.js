@@ -20,7 +20,7 @@ const ListPreviewCard = ({ lists }) => {
   }
 
   return (
-    <div className="container flex flex-wrap">
+    <div className="grid md:grid-cols-2 lg:grid-rows-3 xl:grid-rows-4 lg:grid-flow-col">
       {lists &&
         lists.map((list, index) => (
           <div key={list._id}>
